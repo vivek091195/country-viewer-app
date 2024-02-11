@@ -9,6 +9,7 @@ import com.example.countryviewerapp.viewmodel.CountryListViewModel
 
 class CountryAdapter :
     ListAdapter<CountryListViewModel.State.Country, CountryViewHolder>(DIFF_CALLBACK) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         val binding = CountryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CountryViewHolder(binding)

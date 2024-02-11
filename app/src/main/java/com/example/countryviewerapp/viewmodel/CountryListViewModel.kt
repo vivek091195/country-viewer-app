@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class CountryListViewModel : ViewModel() {
     private val _countriesList = MutableStateFlow(State())
@@ -17,33 +16,36 @@ class CountryListViewModel : ViewModel() {
 
     fun fetchCountryData() {
         CoroutineScope(Dispatchers.IO).launch {
+            _countriesList.update {
+                it.copy(
+                    loading = true
+                )
+            }
             val response = countryService.getCountry().execute()
-            withContext(Dispatchers.Main) {
-                if (response.isSuccessful) {
-                    _countriesList.update {
-                        it.copy(
-                            countryList = response.body()?.map { country ->
-                                State.Country(
-                                    countryName = country.countryName,
-                                    flag = country.flag,
-                                    numericCode = country.numericCode
-                                )
-                            },
-                            error = null,
-                            loading = false
-                        )
-                    }
-                } else {
-                    _countriesList.update {
-                        it.copy(
-                            countryList = null,
-                            error = State.ErrorDetails(
-                                code = response.code(),
-                                message = response.message()
-                            ),
-                            loading = false
-                        )
-                    }
+            if (response.isSuccessful) {
+                _countriesList.update {
+                    it.copy(
+                        countryList = response.body()?.map { country ->
+                            State.Country(
+                                countryName = country.countryName,
+                                flag = country.flag,
+                                numericCode = country.numericCode
+                            )
+                        },
+                        error = null,
+                        loading = false
+                    )
+                }
+            } else {
+                _countriesList.update {
+                    it.copy(
+                        countryList = null,
+                        error = State.ErrorDetails(
+                            code = response.code(),
+                            message = response.message()
+                        ),
+                        loading = false
+                    )
                 }
             }
         }

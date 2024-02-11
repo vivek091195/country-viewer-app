@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Country Viewer App</string>
+    <string name="app_title">Country List</string>
+    <string name="flag_image">Flag Image</string>
 </resources>

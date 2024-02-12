@@ -7,8 +7,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    android:background="@color/black">
+    app:layout_constraintBottom_toBottomOf="parent">
 
     <TextView
         android:id="@+id/app_title"
@@ -16,8 +15,9 @@
         android:layout_height="wrap_content"
         android:text="@string/app_title"
         android:textSize="36sp"
+        android:textColor="@color/black"
         android:textFontWeight="700"
-        android:textColor="#ff5b00"
+        android:textAllCaps="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginVertical="24dp"

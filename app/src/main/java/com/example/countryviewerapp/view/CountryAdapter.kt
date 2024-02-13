@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.countryviewerapp.databinding.CountryBinding
+import com.example.countryviewerapp.utils.loadImage
 import com.example.countryviewerapp.viewmodel.CountryListViewModel
 
 
@@ -34,6 +35,7 @@ class CountryAdapter :
         fun bind(item: CountryListViewModel.State.Country) {
             with(binding) {
                 countryName.text = item.countryName
+                countryFlag.loadImage(item.flag)
                 if (selectedPosition == layoutPosition) {
                     countryCard.setCardBackgroundColor(android.graphics.Color.GRAY)
                     countryName.setTextColor(android.graphics.Color.WHITE)
